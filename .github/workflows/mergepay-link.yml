@@ -1,0 +1,20 @@
+# Created by MergePay's one-click wallet link. Safe to keep or delete.
+# It proves "this GitHub account controls this wallet" to the MergePay contract on Arc:
+# GitHub signs a token for this run, and the contract verifies GitHub's signature.
+name: MergePay link
+on:
+  workflow_dispatch:
+    inputs:
+      wallet:
+        description: Arc wallet to receive bounties
+        required: true
+
+jobs:
+  link:
+    uses: codeswithroh/mergepay/.github/workflows/link.yml@v1
+    permissions:
+      id-token: write
+    with:
+      wallet: ${{ inputs.wallet }}
+      contract: "0xcff79B144833b36ca53b310C1Ad7854AF9Ff9EeD"
+      relayer: https://mergepay.codeswithroh.workers.dev
